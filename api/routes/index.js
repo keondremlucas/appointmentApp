@@ -104,7 +104,7 @@ router.delete("/", (req, res, next) => {
 //DELETE APPOINTMENT BY ID
 router.delete("/:id", (req, res, next) => {
   const { id } = req.params;
-  const _id = ObjectId(id);
+  const _id = ObjectID(id);
   const collection = req.app.locals[config.dbCollection];
   collection
     .deleteOne({ _id })
