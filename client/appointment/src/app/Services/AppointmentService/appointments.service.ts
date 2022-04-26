@@ -33,7 +33,9 @@ appointmentArray: Appointment[] = [];
 
 //Get All Appointments
 getAllAppointments(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${env.API_URL}/appointments`);
+    return this.http.get<Appointment[]>(`${env.API_URL}/appointments`).pipe(tap(data => {
+      this.appointmentArray = data;
+    }));
 
   }
 

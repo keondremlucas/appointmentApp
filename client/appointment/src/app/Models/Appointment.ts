@@ -3,4 +3,5 @@ export interface Appointment {
   appointmentDate: string;
   name: string;
   email: string;
+
 }

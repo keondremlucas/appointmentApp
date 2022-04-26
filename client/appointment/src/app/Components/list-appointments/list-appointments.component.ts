@@ -13,20 +13,20 @@ export class ListAppointmentsComponent implements OnInit {
   public errorMsg: string = '';
   public successMsg: string = '';
   public columns:string[] = ['appointmentDate', 'name', 'email', 'cancel'];
+  public dataSource: any;
+  public appointments: any;
 
-  public appointments: Appointment[] = [];
-  dataSource: any;
-  paginator: any;
-  sort: any;
 
   constructor(private appointmentService: AppointmentsService) {}
 
   ngOnInit(): void {
     //Get All Appointments and assign to appointments array
+
    this.appointmentService.getAllAppointments().subscribe(data => {
       this.appointments = data;
-      this.dataSource = new MatTableDataSource<any>(data);
-      console.log(this.dataSource);
+      console.log(this.appointments);
+      var dataSource = new MatTableDataSource(this.appointments);
+      this.dataSource = dataSource.data
       this.loading = false;
       console.log(this.appointments);
     }

@@ -4,23 +4,23 @@
 
 
 <div  *ngIf="!loading && !loading">
-  <table mat-table *ngIf="appointments" [dataSource] = "appointments" class="mat-elevation-z8">
+  <table *ngIf="appointments" mat-table #table  [dataSource]="appointments" class="mat-elevation-z8">
 
     <ng-container matColumnDef="appointmentDate">
       <th mat-header *matHeaderCellDef>Appointment Date</th>
-      <td mat-cell *matCellDef="let appointment">
-        {{appointment.appointmentDate}}
+      <td mat-cell *matCellDef="let appointments" style="text-align: center;">
+        {{appointments.appointment.appointmentDate}}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let appointment" text="black">{{appointment.name}}</td>
+      <td mat-cell *matCellDef="let appointment" text="black" style="text-align: center;">{{appointment.appointment.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <th mat-header *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let appointment">{{appointment.email}}</td>
+      <td mat-cell *matCellDef="let appointment" style="text-align: center;">{{appointment.appointment.email}}</td>
     </ng-container>
 
     <ng-container matColumnDef="cancel">
@@ -33,4 +33,16 @@
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let appointments; columns: columns"></tr>
   </table>
-</div>
+
+<!-- </div>
+<table>
+  <tr *ngFor='let x of appointments'>
+
+  <td>{{x.appointment.name}}</td>
+  <td>{{x._id}}</td>
+  <td>{{x.email}}</td>
+  <td>
+    <button (click)="cancelAppointment(x._id)" mat-raised-button color="warn">Cancel</button>
+  </td>
+</tr>
+</table> -->
