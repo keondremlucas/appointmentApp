@@ -6,27 +6,35 @@
 <div  *ngIf="!loading && !loading">
   <table *ngIf="appointments" mat-table #table  [dataSource]="appointments" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="appointmentDate">
+    <ng-container matColumnDef="appointmentDate" style="text-align: center;">
       <th mat-header *matHeaderCellDef>Appointment Date</th>
       <td mat-cell *matCellDef="let appointments" style="text-align: center;">
         {{appointments.appointment.appointmentDate}}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header *matHeaderCellDef>Name</th>
+    <ng-container matColumnDef="name" >
+      <th mat-header *matHeaderCellDef style="text-align: center;">Name</th>
       <td mat-cell *matCellDef="let appointment" text="black" style="text-align: center;">{{appointment.appointment.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header *matHeaderCellDef>Email</th>
+      <th mat-header *matHeaderCellDef style="text-align: center;">Email</th>
       <td mat-cell *matCellDef="let appointment" style="text-align: center;">{{appointment.appointment.email}}</td>
     </ng-container>
 
     <ng-container matColumnDef="cancel">
-      <th mat-header *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let appointment" style = width:auto>
+      <th mat-header *matHeaderCellDef style="text-align: left;" > Cancel Appointment</th>
+      <td mat-cell *matCellDef="let appointment" style = "align-content: center;" >
         <button (click)="cancelAppointment(appointment._id)" mat-raised-button color="warn">Cancel</button>
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="update">
+      <th mat-header *matHeaderCellDef style="text-align: left;" > Update Appointment</th>
+      <td mat-cell *matCellDef="let appointment" style = "align-content: center;" >
+        <!-- <button (click)="updateAppointment(appointment._id)" mat-raised-button color="warn">Update</button> -->
       </td>
 
     </ng-container>
@@ -34,8 +42,9 @@
     <tr mat-row *matRowDef="let appointments; columns: columns"></tr>
   </table>
 
-<!-- </div>
-<table>
+</div>
+
+<!-- <table>
   <tr *ngFor='let x of appointments'>
 
   <td>{{x.appointment.name}}</td>

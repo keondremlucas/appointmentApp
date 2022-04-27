@@ -12,7 +12,7 @@ export class ListAppointmentsComponent implements OnInit {
   public loading = true;
   public errorMsg: string = '';
   public successMsg: string = '';
-  public columns:string[] = ['appointmentDate', 'name', 'email', 'cancel'];
+  public columns:string[] = ['appointmentDate', 'name', 'email', 'cancel', 'update'];
   public dataSource: any;
   public appointments: any;
 
@@ -20,7 +20,7 @@ export class ListAppointmentsComponent implements OnInit {
   constructor(private appointmentService: AppointmentsService) {}
 
   ngOnInit(): void {
-    //Get All Appointments and assign to appointments array
+    //Populate table with Get All Appointments
 
    this.appointmentService.getAllAppointments().subscribe(data => {
       this.appointments = data;
@@ -39,8 +39,8 @@ export class ListAppointmentsComponent implements OnInit {
 
 
 //Cancel Appointment by ID
-public cancelAppointment(id: string)
-{
+  public cancelAppointment(id: string)
+  {
     this.appointmentService.CancelAppointmentById(id).pipe(
       mergeMap(() => this.appointmentService.getAllAppointments()))
       .subscribe((appointmets: Appointment[]) => {
@@ -53,8 +53,22 @@ public cancelAppointment(id: string)
           this.loading = false;
         }
       );
-    }
   }
+  //Update Appointment by ID
+  // public updateAppointment(id: string)
+  // {
+  //   this.appointmentService.updateAppointment(id).pipe(tap(data => {
+  //     for(let i = 0; i < this.appointments.length; i++){
+  //       if(this.appointments[i]._id == id){
+  //         this.appointments[i] = data;
+  //       }
+  //     }
+  //   }
+  //   ))
+  // }
+
+
+}
 
 
 
