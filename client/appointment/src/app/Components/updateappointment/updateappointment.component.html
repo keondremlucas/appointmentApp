@@ -1,23 +1,18 @@
-
-<div >
-<h2 style="margin:0 auto; text-align: center;" >Create a new Appointment!</h2>
-<mat-spinner *ngIf="loading" style="margin:0 auto;" ></mat-spinner>
-<mat-toolbar *ngIf="successMsg" color="accent">{{successMsg}}</mat-toolbar>
-<mat-toolbar *ngIf="errorMsg" color="warn">{{errorMsg}}</mat-toolbar>
+<h3 style="margin:0 auto;">Update Appointment: {{appointment._id}}</h3>
 <form  (ngSubmit)='onSubmit()' [formGroup]="appointmentForm">
   <div class="form-group">
-    <label for="appointmentDate">Appointment Date</label>
+    <label for="appointmentDate">Appointment Date: {{appointment.appointment.appointmentDate}} </label>
     <input type="text" class="form-control" formControlName="appointmentDate" id="appointmentDate"  >
     <small id="appointmentDate" class="form-text text-muted">DD/MM/YYYY</small>
   </div>
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="name">Name: {{appointment.appointment.name}}</label>
     <input type="input" class="form-control" formControlName="name" id="name">
   </div>
   <div class="form-group">
-    <label for="email">Email</label>
+    <label for="email">Email: {{appointment.appointment.email}} </label>
     <input type="email" class="form-control" formControlName="email" id="email" >
   </div>
   <button type="submit"  class="btn btn-primary">Submit</button>
 </form>
-</div>
+

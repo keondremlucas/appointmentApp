@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/Models/Appointment';
 import { AppointmentsService } from 'src/app/Services/AppointmentService/appointments.service';
 import { mergeMap } from 'rxjs/operators';
@@ -9,6 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./list-appointments.component.css'],
 })
 export class ListAppointmentsComponent implements OnInit {
+  public appointmentPlaceholder!: Appointment;
+
   public loading = true;
   public errorMsg: string = '';
   public successMsg: string = '';
@@ -55,17 +57,15 @@ export class ListAppointmentsComponent implements OnInit {
       );
   }
   //Update Appointment by ID
-  // public updateAppointment(id: string)
-  // {
-  //   this.appointmentService.updateAppointment(id).pipe(tap(data => {
-  //     for(let i = 0; i < this.appointments.length; i++){
-  //       if(this.appointments[i]._id == id){
-  //         this.appointments[i] = data;
-  //       }
-  //     }
-  //   }
-  //   ))
-  // }
+  public updateAppointment(id: string)
+  {
+    this.appointmentService.getAppointmentById(id).subscribe(data => {
+      console.log(data);
+      this.appointmentPlaceholder = data[0];
+      // console.log(this.appointmentPlaceholder[0]._id);
+    });
+
+  }
 
 
 }

@@ -34,7 +34,7 @@
     <ng-container matColumnDef="update">
       <th mat-header *matHeaderCellDef style="text-align: left;" > Update Appointment</th>
       <td mat-cell *matCellDef="let appointment" style = "align-content: center;" >
-        <!-- <button (click)="updateAppointment(appointment._id)" mat-raised-button color="warn">Update</button> -->
+        <button (click)="updateAppointment(appointment._id)" mat-raised-button color="warn">Update</button>
       </td>
 
     </ng-container>
@@ -55,3 +55,10 @@
   </td>
 </tr>
 </table> -->
+<div>
+  <br>
+  <br>
+</div>
+<div *ngIf="appointmentPlaceholder">
+  <app-updateappointment [appointment]='appointmentPlaceholder'></app-updateappointment>
+</div>
