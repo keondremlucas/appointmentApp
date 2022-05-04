@@ -63,6 +63,8 @@ getAllAppointments(): Observable<Appointment[]> {
     return this.http.delete<any>(`${env.API_URL}/appointments/${id}`);
 
   }
+//
+
 
 };
 

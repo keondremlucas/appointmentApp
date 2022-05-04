@@ -6,10 +6,12 @@ const MongoClient = require("mongodb").MongoClient;
 const cors = require("cors");
 const app = require("../app");
 const { ObjectID } = require("bson");
+const { text } = require("express");
 
 //GET ALL APPOINTMENTS
 router.get("/", (req, res, next) => {
   const collection = req.app.locals[config.dbCollection];
+  
   collection
     .find({})
     .toArray()
@@ -111,5 +113,22 @@ router.delete("/:id", (req, res, next) => {
     .then((result) => res.json(result))
     .catch((error) => res.send(error));
 });
+
+//Get appointments by keyword
+router.get("/:keyword", (req, res, next) => {
+  const { keyword } = req.params;
+  const collection = req.app.locals[config.dbCollection];
+  collection.getIndexes();
+  collection.createIndex({appointmentDate: "text",name: "text", email: "text"});
+  collection
+    .find({  $text:{$search: keyword} })
+    .toArray()
+    .then((results) => res.json(results))
+    .catch((error) => res.send(error));
+   
+  
+});
+
+
 
 module.exports = router;
