@@ -1,3 +1,5 @@
+<mat-toolbar *ngIf="successMsg" color="primary">{{successMsg}}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{errorMsg}}</mat-toolbar>
 <h3 style="margin:0 auto;">Update Appointment: {{appointment._id}}</h3>
 <form  (ngSubmit)='onSubmit()' [formGroup]="appointmentForm">
   <div class="form-group">
@@ -13,6 +15,6 @@
     <label for="email">Email: {{appointment.appointment.email}} </label>
     <input type="email" class="form-control" formControlName="email" id="email" >
   </div>
-  <button type="submit"  class="btn btn-primary">Submit</button>
+  <button type="submit" (click)="onSubmit()"  class="btn btn-primary">Submit</button>
 </form>
 
