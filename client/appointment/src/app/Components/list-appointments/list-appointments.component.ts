@@ -89,8 +89,14 @@ export class ListAppointmentsComponent implements OnInit {
       mergeMap(() => this.appointmentService.getAllAppointments()))
       .subscribe((appointmets: Appointment[]) => {
           this.appointments = appointmets;
-          this.loading = false;
+
           this.successMsg = 'Appointment has been cancelled';
+
+          setInterval(() => {
+
+            window.location.reload();
+            
+           }, 1000);
         },
         (error: { error: { message: any; }; }) => {
           this.errorMsg = error.error.message;
@@ -109,6 +115,10 @@ export class ListAppointmentsComponent implements OnInit {
 
   }
 
+  public back()
+  {
+    window.location.reload();
+  }
 
 }
 

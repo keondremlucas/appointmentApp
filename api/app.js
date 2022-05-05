@@ -4,6 +4,42 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//GRAPHQL Implementation
+const { graphqlHTTP } = require('express-graphql');
+const { 
+  GraphQLSchema, 
+  GraphQLObjectType,
+  GraphQLString
+} = require('graphql');
+
+const schema = new GraphQLSchema({
+  query: new GraphQLObjectType({
+  name: 'Appointment',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+      resolve: () => '1'
+    },
+    appointmentDate:{
+      type:GraphQLString,
+      resolve: () => '5/2/2022'
+    },
+    name:{
+      type:GraphQLString,
+      resolve: () => 'Krishna'
+    },
+    email: 
+    {
+      type:GraphQLString,
+      resolve: () => 'Krishna@yahoo.com'
+    }
+   
+  
+  })
+  })});
+
+
+
 const config = require('./config');
 const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
@@ -32,6 +68,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+//GraphQL GUI Route
+app.use('/graphql', graphqlHTTP({graphiql: true, schema: schema}));
+
 //Fetch Collection 
 app.use((req, res, next) => {
   const collection = req.app.locals[config.dbCollection];
