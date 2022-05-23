@@ -63,7 +63,11 @@ getAllAppointments(): Observable<Appointment[]> {
     return this.http.delete<any>(`${env.API_URL}/appointments/${id}`);
 
   }
-//
+//Get Appointments by keyword
+keywordSearch(keyword: string): Observable<any>{
+  return this.http.get<any>(`${env.API_URL}/search/${keyword}`);
+
+}
 
 
 };

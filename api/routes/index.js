@@ -115,13 +115,13 @@ router.delete("/:id", (req, res, next) => {
 });
 
 //Get appointments by keyword
-router.get("/:keyword", (req, res, next) => {
+router.get("/search/:keyword", (req, res, next) => {
   const { keyword } = req.params;
   const collection = req.app.locals[config.dbCollection];
-  collection.getIndexes();
-  collection.createIndex({appointmentDate: "text",name: "text", email: "text"});
+  
+
   collection
-    .find({  $text:{$search: keyword} })
+.find({$or: [{name: keyword},{email:keyword},{date:keyword}] })
     .toArray()
     .then((results) => res.json(results))
     .catch((error) => res.send(error));

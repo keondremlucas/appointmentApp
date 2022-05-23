@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 //GRAPHQL Implementation
 const { graphqlHTTP } = require('express-graphql');
 const { 
@@ -11,32 +10,54 @@ const {
   GraphQLObjectType,
   GraphQLString
 } = require('graphql');
+const appointments = [{id:'62728086faeb133d09fddc02',appointmentDate: '5/1/2020', name: 'Dre', email: 'k@yahoo.com'},{id: '6272d49c034ab0c58de370ee', appointmentDate: '5/2/1990', name: 'Shelly', email: 'shelly@yahoo.com'}]
 
-const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
+
+  const AppointmentType = new GraphQLObjectType({
   name: 'Appointment',
-  fields: () => ({
+  fields: () => 
+  ({
     id: {
-      type: GraphQLString,
-      resolve: () => '1'
+      type: GraphQLString
     },
     appointmentDate:{
-      type:GraphQLString,
-      resolve: () => '5/2/2022'
+      type:GraphQLString
     },
     name:{
-      type:GraphQLString,
-      resolve: () => 'Krishna'
+      type:GraphQLString
     },
     email: 
     {
-      type:GraphQLString,
-      resolve: () => 'Krishna@yahoo.com'
+      type:GraphQLString
     }
-   
-  
-  })
-  })});
+   })
+
+  });
+
+  const RootQuery = new GraphQLObjectType({
+    name: 'RootQueryType',
+    fields: () => 
+    ({
+      appointment: 
+      {
+          type: AppointmentType,
+          args: {id: {type: GraphQLString}},
+          resolve(parent,args)
+          {
+            appointments.forEach(Appointment => {
+              if(Appointment.id == args)
+              {
+                return(Appointment);
+              }
+            });
+          }
+      }
+    })
+  });
+
+const schema = new GraphQLSchema({
+  query:RootQuery
+})
 
 
 
